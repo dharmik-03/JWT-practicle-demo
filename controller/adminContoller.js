@@ -58,13 +58,6 @@ const loginAdmin = async (req, res) => {
 };
 
 
-// const update=async (req,res,next) => {
-//     try {
-        
-//     } catch (error) {
-        
-//     }
-// }ṭṭ
 
 export default {
     registerAdmin,

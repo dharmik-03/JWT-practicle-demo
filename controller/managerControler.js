@@ -31,6 +31,32 @@ const registerManager = async (req, res, next) => {
 }
 
 
+const loginManager = async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
+        const manager = await managerModel.findByCredentials(
+            email,
+            password
+        );
 
-export default {registerManager}
+        const token = await manager.generateAuthToken();
+
+        res.status(200).json({
+            success: true,
+            message: "Login successful",
+            token: token,
+            data: manager,
+        });
+
+    } catch (error) {
+        console.error("Login Error:", error);
+
+        res.status(401).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+export default {registerManager,loginManager}
